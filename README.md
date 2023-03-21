@@ -1,24 +1,27 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Boilerplate ruby on rails using docker and postgres database.
 
-Things you may want to cover:
+## BUILD 
 
-* Ruby version
+After pulling the project run: 
 
-* System dependencies
+```
+make-build
+make-up
+```
 
-* Configuration
+## MIGRATIONS
 
-* Database creation
+```
+make-migrate-up
+```
 
-* Database initialization
+## SERVER UP
 
-* How to run the test suite
+```
+make-run
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Access trough: https://localhost:3000/
 
-* Deployment instructions
-
-* ...
