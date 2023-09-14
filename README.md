@@ -2,26 +2,25 @@
 
 Boilerplate ruby on rails using docker and postgres database.
 
-## BUILD 
+## BUILD
 
-After pulling the project run: 
+After pulling the project run:
 
 ```
-make-build
-make-up
+make build
+make up
 ```
 
 ## MIGRATIONS
 
 ```
-make-migrate-up
+make migrate-up
 ```
 
 ## SERVER UP
 
 ```
-make-run
+make run
 ```
 
 Access trough: https://localhost:3000/
-
