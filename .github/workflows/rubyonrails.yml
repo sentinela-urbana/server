@@ -33,8 +33,7 @@ jobs:
 
       - name: Install bundler and gems
         run: |
-          sudo apt install -yqq libpq-dev
-          gem install bundler
+          gem install bundler --install-dir ${{ runner.temp }}
           bundle install --jobs 4 --retry 3
 
       - name: Set up database schema
@@ -54,7 +53,7 @@ jobs:
 
       - name: Install bundler and gems
         run: |
-          gem install bundler
+          gem install bundler --install-dir ${{ runner.temp }}
           bundle install --jobs 4 --retry 3
 
       - name: Security audit dependencies
