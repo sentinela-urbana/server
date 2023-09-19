@@ -6,7 +6,6 @@ default: &default
   database: <%= ENV['DB_NAME'] %>
   username: <%= ENV['DB_USERNAME'] %>
   password: <%= ENV['DB_PASSWORD'] %>
-
 development:
   <<: *default
 

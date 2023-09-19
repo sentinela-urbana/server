@@ -1,17 +1,16 @@
-FROM ruby:3.3-rc-slim-bullseye
+FROM ruby:3.2.2-bullseye
 
 RUN bundle config --global frozen 1
 
 RUN apt-get update -qq && apt-get install -y nodejs npm yarn postgresql-client libpq-dev
 
-WORKDIR /usr/src/app
+RUN mkdir /app
 
-COPY Gemfile* /app/
+WORKDIR /app
 
-COPY . .
-
-RUN gem install bundler
+ADD Gemfile /app/Gemfile
+ADD Gemfile.lock /app/Gemfile.lock
 
 RUN bundle install
 
-RUN bundle binstubs --all
+ADD . /app

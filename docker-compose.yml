@@ -2,20 +2,25 @@ version: '3'
 
 services:
     app:
-        image: ruby:3.3-rc-slim-bullseye
+        build: .
+        container_name: boilerplate
         ports:
-            - 3300:3300
-        working_dir: /app
+            - 3000:3000
         volumes:
-            - ./:/app
-        command: bundle exec rails s -b 0.0.0.0
+            - .:/app
+        command: bundle exec rails s -p 3000 -b 0.0.0.0
         environment:
             DB_HOST: ${DB_HOST}
             DB_NAME: ${DB_NAME}
             DB_USERNAME: ${DB_USERNAME}
             DB_PASSWORD: ${DB_PASSWORD}
-    postgres:
-        image: postgres:16
+        depends_on:
+            - db
+            - redis
+        networks:
+            - boilerplate_network
+    db:
+        image: postgres:13.11
         container_name: postgres-boilerplate
         command: "postgres -c 'max_connections=500'"
         volumes:
@@ -26,10 +31,19 @@ services:
             POSTGRES_PASSWORD: ${DB_PASSWORD}
         ports:
             - "5432:5432"
+        networks:
+            - boilerplate_network
+    redis:
+        image: redis:3.2-alpine
+        command: redis-server --port 7479
+        ports:
+            - "7479:7479"
+        networks:
+            - boilerplate_network
 volumes:
     app:
     postgres-data:
 
+
 networks:
-    default:
-        name: boilerplate
+    boilerplate_network:
