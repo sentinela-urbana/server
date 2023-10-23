@@ -7,6 +7,6 @@ down:
 logs:
 	docker compose logs -f
 migrate-up:
-	docker exec -it base-ror-project-web-1 rails db:migrate
+	docker exec -it boilerplate rails db:migrate
 run:
 	docker compose run web
