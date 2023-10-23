@@ -2,25 +2,24 @@ version: '3'
 
 services:
     app:
-        build: .
-        container_name: boilerplate
+        build:
+            context: .
+            dockerfile: Dockerfile
         ports:
             - 3000:3000
+        depends_on:
+            - database
         volumes:
-            - .:/app
-        command: bundle exec rails s -p 3000 -b 0.0.0.0
+            - ./:/app
+            - gem_cache:/usr/local/bundle/gems
+        env_file: .env
         environment:
             DB_HOST: ${DB_HOST}
             DB_NAME: ${DB_NAME}
             DB_USERNAME: ${DB_USERNAME}
             DB_PASSWORD: ${DB_PASSWORD}
-        depends_on:
-            - db
-            - redis
-        networks:
-            - boilerplate_network
-    db:
-        image: postgres:13.11
+    database:
+        image: postgres:16
         container_name: postgres-boilerplate
         command: "postgres -c 'max_connections=500'"
         volumes:
