@@ -1,17 +1,13 @@
-FROM ruby:3.3-rc-slim-bullseye
-
-RUN bundle config --global frozen 1
+FROM ruby:3.1.0
 
 RUN apt-get update -qq && apt-get install -y nodejs npm yarn postgresql-client libpq-dev
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY Gemfile* /app/
+COPY Gemfile Gemfile.lock ./
 
-COPY . .
+RUN bundle check || bundle install
 
-RUN gem install bundler
+COPY . ./
 
-RUN bundle install
-
-RUN bundle binstubs --all
+ENTRYPOINT [ "./entrypoints/docker-entrypoint.sh" ]

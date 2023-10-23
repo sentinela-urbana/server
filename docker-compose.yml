@@ -2,19 +2,23 @@ version: '3'
 
 services:
     app:
-        image: ruby:3.3-rc-slim-bullseye
+        build:
+            context: .
+            dockerfile: Dockerfile
         ports:
-            - 3300:3300
-        working_dir: /app
+            - 3000:3000
+        depends_on:
+            - database
         volumes:
             - ./:/app
-        command: bundle exec rails s -b 0.0.0.0
+            - gem_cache:/usr/local/bundle/gems
+        env_file: .env
         environment:
             DB_HOST: ${DB_HOST}
             DB_NAME: ${DB_NAME}
             DB_USERNAME: ${DB_USERNAME}
             DB_PASSWORD: ${DB_PASSWORD}
-    postgres:
+    database:
         image: postgres:16
         container_name: postgres-boilerplate
         command: "postgres -c 'max_connections=500'"
@@ -27,8 +31,8 @@ services:
         ports:
             - "5432:5432"
 volumes:
-    app:
     postgres-data:
+    gem_cache:
 
 networks:
     default:
