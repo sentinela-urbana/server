@@ -6,7 +6,7 @@ class CreatePostalCodes < ActiveRecord::Migration[7.0]
       t.string :postal_code
       t.string :neighbourhood
       t.string :city
-      t.string :region_code
+      t.references :region_code, null: false
 
       t.timestamps
     end
