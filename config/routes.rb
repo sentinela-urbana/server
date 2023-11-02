@@ -1,14 +1,13 @@
 Rails.application.routes.draw do
-  namespace :api do
+  devise_for :users
 
+  namespace :api do
     namespace :users do
       resource :login, controller: :login, only: [:create]
     end
 
-    constraints subdomain: "observador" do
-      namespace :surveillance do
-        resources :cameras, only: [:index]
-      end
+    namespace :surveillance do
+      resources :spots, only: [:index]
     end
 
     mount ActionCable.server => "/cable"

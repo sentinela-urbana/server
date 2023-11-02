@@ -1,15 +1,18 @@
 # == Schema Information
 #
-# Table name: postal_codes
+# Table name: surveillance_regions
 #
 #  id             :bigint           not null, primary key
-#  code           :string
-#  neighbourhood  :string
-#  city           :string
 #  region_code_id :bigint           not null
+#  user_id        :bigint           not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
-class PostalCode < ApplicationRecord
-  belongs_to :region
-end
+
+one:
+  spot: one
+  user: one
+
+two:
+  spot: two
+  user: two

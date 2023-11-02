@@ -1,19 +1,15 @@
 # == Schema Information
 #
-# Table name: postal_codes
+# Table name: spots
 #
 #  id             :bigint           not null, primary key
-#  code           :string
-#  neighbourhood  :string
-#  city           :string
 #  region_code_id :bigint           not null
+#  address_id     :bigint           not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
-require "test_helper"
-
-class PostalCodeTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+class Spot < ApplicationRecord
+  belongs_to :region
+  has_one :address, as: :addressable
+  has_one :postal_code, through: :address
 end

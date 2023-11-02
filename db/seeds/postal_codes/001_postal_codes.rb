@@ -10,12 +10,12 @@ require 'csv'
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'postal_codes.csv'))
 csv = CSV.parse(csv_text, headers: true)
 csv.each do |row|
-  region_code = RegionCode.find_or_create_by(region_code: row['postalcode'][2..4])
+  region = Region.find_or_create_by(code: row['postalcode'][2..4])
 
   postal_code = PostalCode.new
-  postal_code.postal_code = row['postalcode']
+  postal_code.code = row['postalcode']
   postal_code.city = 'Caraguatatuba'
   postal_code.neighbourhood = row['neighbourhood']
-  postal_code.region_code_id = region_code.id
+  postal_code.region_id = region.id
   postal_code.save
 end

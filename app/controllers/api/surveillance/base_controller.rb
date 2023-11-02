@@ -9,6 +9,12 @@ class Api::Surveillance::BaseController < ::Api::ApplicationController
   protected
 
   def authorize_user!
-    authorize! :manage, :monitors
+    authorize! :manage, controller_namespace
+  end
+
+  private
+
+  def controller_namespace
+    controller_path.split('/').second.to_sym
   end
 end

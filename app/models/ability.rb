@@ -3,17 +3,18 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    if user.role.surveillance?
+    case user.role.to_sym
+    when :surveillance
       has_surveillance_access
-    elsif user.role.basic?
+    when :basic
       has_basic_access
-    elsif user.role.admin?
+    when :admin
       has_admin_access
     end
   end
 
   def has_surveillance_access
-    can :manage, :all, :namespace => "surveillance"
+    can :manage, :surveillance
   end
 
   def has_basic_access

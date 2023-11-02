@@ -1,15 +1,19 @@
 # frozen_string_literal: true
-class Api::ApplicationController < ActionController::Base
+class Api::ApplicationController < ActionController::API
   respond_to :json
 
   before_action :authenticate_user!
-  before_action :authorize_user!
 
   protected
 
-  def authorize_user!
-    if current_user.present?
-      head :unauthorized
-    end
+  def authenticate_user!
+    @current_user = decode_and_validate_jwt_token
+    head :unauthorized unless @current_user
+  end
+
+  def decode_and_validate_jwt_token
+    token = request.headers['Authorization']&.split(' ')&.last
+    user = Warden::JWTAuth::UserDecoder.new.call(token, :user, nil)
+    User.find(user.id)
   end
 end

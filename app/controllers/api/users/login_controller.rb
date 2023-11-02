@@ -1,7 +1,6 @@
 # app/controllers/users/sessions_controller.rb
 class Api::Users::LoginController < ::Api::ApplicationController
   skip_before_action :authenticate_user!, only: [:create]
-  skip_before_action :authorize_user!, only: [:create]
 
   # POST /api/users/login
   def create
