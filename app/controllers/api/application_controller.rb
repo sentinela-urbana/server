@@ -13,7 +13,15 @@ class Api::ApplicationController < ActionController::API
 
   def decode_and_validate_jwt_token
     token = request.headers['Authorization']&.split(' ')&.last
+
     user = Warden::JWTAuth::UserDecoder.new.call(token, :user, nil)
     User.find(user.id)
+  rescue StandardError => e
+    log_error(e:)
+    head :unauthorized
+  end
+
+  def log_error(custom_data = {})
+    # NOT IMPLEMENTED YET
   end
 end

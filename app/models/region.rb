@@ -1,11 +1,11 @@
 # == Schema Information
 #
-# Table name: region_codes
+# Table name: regions
 #
-#  id          :bigint           not null, primary key
-#  region_code :string           not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id         :bigint           not null, primary key
+#  code       :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 class Region < ApplicationRecord
   has_many :spots

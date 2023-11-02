@@ -46,10 +46,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_02_181953) do
 
   create_table "spots", force: :cascade do |t|
     t.bigint "region_id", null: false
-    t.bigint "address_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["address_id"], name: "index_spots_on_address_id"
     t.index ["region_id"], name: "index_spots_on_region_id"
   end
 
