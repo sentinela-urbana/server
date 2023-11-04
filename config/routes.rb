@@ -2,12 +2,15 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :api do
-    namespace :users do
+    namespace :v1 do
       resource :login, controller: :login, only: [:create]
     end
 
     namespace :surveillance do
-      resources :spots, only: [:index]
+      namespace :v1 do
+        resources :spots, only: [:index]
+        resources :users, only: [:show]
+      end
     end
 
     mount ActionCable.server => "/cable"

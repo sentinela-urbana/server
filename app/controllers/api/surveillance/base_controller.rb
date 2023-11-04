@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Api::Surveillance::BaseController < ::Api::ApplicationController
   before_action :authorize_user!
 

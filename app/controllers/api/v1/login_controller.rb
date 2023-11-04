@@ -1,5 +1,5 @@
 # app/controllers/users/sessions_controller.rb
-class Api::Users::LoginController < ::Api::ApplicationController
+class Api::V1::LoginController < ::Api::ApplicationController
   skip_before_action :authenticate_user!, only: [:create]
 
   # POST /api/users/login
@@ -8,7 +8,7 @@ class Api::Users::LoginController < ::Api::ApplicationController
 
     if user && user.valid_password?(login_params[:password])
       token = generate_jwt_token(user)
-      render json: { token: token }, status: :ok
+      render json: { token: }, status: :ok
     else
       render json: { errors: { 'email or password' => ['is invalid'] } }, status: :unprocessable_entity
     end
