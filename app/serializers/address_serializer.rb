@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class AddressSerializer < ActiveModel::Serializer
-  attributes :id, :latitude, :longitude, :complement, :created_at, :updated_at
+  attributes :id, :latitude, :longitude, :complement, :postal_code, :created_at, :updated_at
 
-  has_one :postal_code do
+  def postal_code
     object.postal_code.code
   end
 end

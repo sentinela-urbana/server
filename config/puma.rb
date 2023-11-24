@@ -24,6 +24,13 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 # Specifies the `pidfile` that Puma will use.
 pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 
+# config/puma.rb
+ssl_bind "127.0.0.1", "3001", {
+  key: "config/certificates/localhost.key",
+  cert: "config/certificates/localhost.crt",
+  verify_mode: "none"
+}
+
 # Specifies the number of `workers` to boot in clustered mode.
 # Workers are forked web server processes. If using threads and workers together
 # the concurrency of the application would be max `threads` * `workers`.

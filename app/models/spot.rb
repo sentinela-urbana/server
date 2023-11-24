@@ -10,6 +10,7 @@
 #
 class Spot < ApplicationRecord
   belongs_to :region
+  belongs_to :user
   has_one :address, as: :addressable
   has_one :postal_code, through: :address
 end

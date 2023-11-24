@@ -7,21 +7,11 @@ class Api::ApplicationController < ActionController::API
   protected
 
   def authenticate_user!
-    @current_user = decode_and_validate_jwt_token
+    @current_user = ::Authentication.new(token:).fetch_user
     head :unauthorized unless @current_user
   end
 
-  def decode_and_validate_jwt_token
-    token = request.headers['Authorization']&.split(' ')&.last
-
-    user = Warden::JWTAuth::UserDecoder.new.call(token, :user, nil)
-    User.find(user.id)
-  rescue StandardError => e
-    log_error(e:)
-    head :unauthorized
-  end
-
-  def log_error(custom_data = {})
-    # NOT IMPLEMENTED YET
+  def token
+    request.headers['Authorization']&.split(' ')&.last
   end
 end

@@ -26,4 +26,14 @@ class User < ApplicationRecord
     jwt_revocation_strategy: Devise::JWT::RevocationStrategies::Null
 
   has_one :address, as: :addressable
+
+  has_one :spot
+
+  def spot?
+    role == "spot"
+  end
+
+  def surveillance?
+    role == "surveillance"
+  end
 end

@@ -22,5 +22,7 @@ module App
     # config.eager_load_paths << Rails.root.join("extras")
     # config.active_record.schema_format = :sql
     config.action_cable.url = "/cable"
+
+    # config.action_cable.allowed_request_origins = "https://our_url"
   end
 end

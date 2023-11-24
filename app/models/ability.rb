@@ -4,6 +4,8 @@ class Ability
 
   def initialize(user)
     case user.role.to_sym
+    when :spot
+      has_spot_access
     when :surveillance
       has_surveillance_access
     when :basic
@@ -24,4 +26,6 @@ class Ability
   def has_admin_access
     can :manage, :all, :namespace => "admin"
   end
+
+  def has_spot_access; end
 end
