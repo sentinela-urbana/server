@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_02_181953) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_22_013954) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,7 +48,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_02_181953) do
     t.bigint "region_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["region_id"], name: "index_spots_on_region_id"
+    t.index ["user_id"], name: "index_spots_on_user_id"
   end
 
   create_table "surveillance_regions", force: :cascade do |t|
@@ -81,6 +83,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_02_181953) do
     t.index ["taxpayer_registry"], name: "index_users_on_taxpayer_registry"
   end
 
+  add_foreign_key "spots", "users"
   add_foreign_key "surveillance_regions", "regions"
   add_foreign_key "surveillance_regions", "users"
 end
