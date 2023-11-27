@@ -8,8 +8,10 @@ Bundler.require(*Rails.groups)
 
 module App
   class Application < Rails::Application
+    require "pry"
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
+    config.api_only = true
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -18,5 +20,9 @@ module App
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    # config.active_record.schema_format = :sql
+    config.action_cable.url = "/cable"
+
+    # config.action_cable.allowed_request_origins = "https://our_url"
   end
 end

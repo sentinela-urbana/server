@@ -1,6 +1,8 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+
+  require "pry"
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
@@ -59,6 +61,16 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
+  # for websocket
+  config.action_cable.allowed_request_origins = [/http:\/\/*/, /https:\/\/*/, /file:\/\/*/]
+
+  config.action_dispatch.tdl_lenght = 1
+
+  config.log_level = :debug
+
+  config.action_cable.url = "ws://localhost:3000/cable"
+
+  config.web_console.permissions = "172.20.0.0/16"
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 
