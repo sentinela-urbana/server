@@ -1,6 +1,6 @@
-require_relative "boot"
+require_relative 'boot'
 
-require "rails/all"
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -8,7 +8,6 @@ Bundler.require(*Rails.groups)
 
 module App
   class Application < Rails::Application
-    require "pry"
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
     config.api_only = true
@@ -21,7 +20,7 @@ module App
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
     # config.active_record.schema_format = :sql
-    config.action_cable.url = "/cable"
+    config.action_cable.url = '/cable'
 
     # config.action_cable.allowed_request_origins = "https://our_url"
   end
