@@ -24,7 +24,7 @@ class Authentication
 
   def decode_user_from_token
     Warden::JWTAuth::UserDecoder.new.call(token, :user, nil)
-  rescue Warden::JWTAuth::Errors::InvalidToken
+  rescue ::Warden::JWTAuth::Errors::InvalidToken
     nil
   end
 end
