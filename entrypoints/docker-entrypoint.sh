@@ -2,8 +2,15 @@
 
 set -e
 
-if [ -f tmp/pids/server.pid ]; then
-  rm tmp/pids/server.pid
+echo "Starting entrypoint script..."
+
+PID_FILE="/usr/src/app/tmp/pids/server.pid"
+
+if [ -f $PID_FILE ]; then
+  echo "Removing stale server PID file..."
+  rm $PID_FILE
 fi
 
-bundle exec rails s -b 0.0.0.0
+exec bundle exec rails s -b 0.0.0.0
+
+echo "server started"

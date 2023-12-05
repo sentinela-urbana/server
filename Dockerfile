@@ -10,4 +10,4 @@ RUN bundle install
 
 COPY . ./
 
-CMD ["rails", "server", "-b", "0.0.0.0"]
+ENTRYPOINT ["tail", "-f", "/dev/null"]
