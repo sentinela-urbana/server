@@ -1,8 +1,7 @@
-require "active_support/core_ext/integer/time"
+require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
-
-  require "pry"
+  require 'pry'
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
@@ -21,13 +20,13 @@ Rails.application.configure do
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
-  if Rails.root.join("tmp/caching-dev.txt").exist?
+  if Rails.root.join('tmp/caching-dev.txt').exist?
     config.action_controller.perform_caching = true
     config.action_controller.enable_fragment_cache_logging = true
 
     config.cache_store = :memory_store
     config.public_file_server.headers = {
-      "Cache-Control" => "public, max-age=#{2.days.to_i}"
+      'Cache-Control' => "public, max-age=#{2.days.to_i}"
     }
   else
     config.action_controller.perform_caching = false
@@ -62,15 +61,15 @@ Rails.application.configure do
   config.assets.quiet = true
 
   # for websocket
-  config.action_cable.allowed_request_origins = [/http:\/\/*/, /https:\/\/*/, /file:\/\/*/]
+  config.action_cable.allowed_request_origins = [%r{http://*}, %r{https://*}, %r{file://*}]
 
   config.action_dispatch.tdl_lenght = 1
 
   config.log_level = :debug
 
-  config.action_cable.url = "ws://localhost:3000/cable"
+  config.action_cable.url = 'ws://localhost:3000/cable'
 
-  config.web_console.permissions = "172.20.0.0/16"
+  config.web_console.permissions = '172.20.0.0/16'
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 
@@ -79,4 +78,6 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+
+  config.hosts << ENV['PRODUCTION_HOST']
 end
