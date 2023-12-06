@@ -10,4 +10,4 @@ RUN bundle install
 
 COPY . ./
 
-ENTRYPOINT ["tail", "-f", "/dev/null"]
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
