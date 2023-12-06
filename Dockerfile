@@ -10,4 +10,4 @@ RUN bundle install
 
 COPY . ./
 
-CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
