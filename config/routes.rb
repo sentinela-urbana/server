@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resource :login, controller: :login, only: [:create]
+      resources :assistances, only: %i[create show] do
+        patch :answer, on: :member
+      end
     end
 
     namespace :surveillance do

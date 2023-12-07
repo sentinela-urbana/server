@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_22_013954) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_07_005140) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,6 +25,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_22_013954) do
     t.datetime "updated_at", null: false
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable"
     t.index ["postal_code_id"], name: "index_addresses_on_postal_code_id"
+  end
+
+  create_table "assistances", force: :cascade do |t|
+    t.bigint "requested_by_id", null: false
+    t.bigint "answered_by_id"
+    t.datetime "answered_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["answered_by_id"], name: "index_assistances_on_answered_by_id"
+    t.index ["requested_by_id"], name: "index_assistances_on_requested_by_id"
   end
 
   create_table "postal_codes", force: :cascade do |t|
@@ -83,6 +93,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_22_013954) do
     t.index ["taxpayer_registry"], name: "index_users_on_taxpayer_registry"
   end
 
+  add_foreign_key "assistances", "users", column: "answered_by_id"
+  add_foreign_key "assistances", "users", column: "requested_by_id"
   add_foreign_key "spots", "users"
   add_foreign_key "surveillance_regions", "regions"
   add_foreign_key "surveillance_regions", "users"

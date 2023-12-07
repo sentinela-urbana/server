@@ -23,17 +23,20 @@ class User < ApplicationRecord
   include Surveillance
 
   devise :database_authenticatable, :registerable, :jwt_authenticatable,
-    jwt_revocation_strategy: Devise::JWT::RevocationStrategies::Null
+         jwt_revocation_strategy: Devise::JWT::RevocationStrategies::Null
 
   has_one :address, as: :addressable
 
   has_one :spot
 
+  has_many :assistances, foreign_key: 'requested_by_id'
+  has_many :assistances, foreign_key: 'answered_by_id'
+
   def spot?
-    role == "spot"
+    role == 'spot'
   end
 
   def surveillance?
-    role == "surveillance"
+    role == 'surveillance'
   end
 end
