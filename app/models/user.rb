@@ -29,8 +29,8 @@ class User < ApplicationRecord
 
   has_one :spot
 
-  has_many :assistances, foreign_key: 'requested_by_id'
-  has_many :assistances, foreign_key: 'answered_by_id'
+  has_many :requested_assistances, class_name: 'Assistance', foreign_key: 'requested_by_id'
+  has_many :answered_assistances, class_name: 'Assistance', foreign_key: 'answered_by_id'
 
   def spot?
     role == 'spot'
@@ -38,5 +38,9 @@ class User < ApplicationRecord
 
   def surveillance?
     role == 'surveillance'
+  end
+
+  def user?
+    role == 'user'
   end
 end
