@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       resources :assistances, only: %i[create show] do
         patch :answer, on: :member
       end
+
+      resources :users, only: %i[show]
     end
 
     namespace :surveillance do
