@@ -10,14 +10,16 @@ class SpotChannel < ApplicationCable::Channel
   end
 
   def receive(data)
-    case data["type"]
-    when "OFFER"
+    case data['type']
+    when 'OFFER'
       return unless spot_can_broadcast?
 
       ActionCable.server.broadcast(channel_id, data)
-    when "ANSWER", "CANDIDATE"
+    when 'ANSWER', 'CANDIDATE'
       return unless user_can_access?
 
+      ActionCable.server.broadcast(channel_id, data)
+    when 'ASSISTANCE'
       ActionCable.server.broadcast(channel_id, data)
     end
   end
@@ -34,7 +36,6 @@ class SpotChannel < ApplicationCable::Channel
 
   def spot_can_broadcast?
     current_user.spot?
-    # current_user.spot&.id == spot_id
   end
 
   def user_can_access?

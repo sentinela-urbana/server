@@ -1,4 +1,6 @@
 class Assistance < ApplicationRecord
+  after_create :broadcast_message
+
   belongs_to :requested_by, class_name: 'User'
   belongs_to :answered_by, class_name: 'User', optional: true
 
@@ -22,8 +24,14 @@ class Assistance < ApplicationRecord
   end
 
   def requested_by_user
-    return if requested_by.user?
+    return if requested_by.spot?
 
     errors.add(:assistance, 'only user can ask assistance')
+  end
+
+  def broadcast_message
+    return unless requested_by.spot.present?
+
+    ActionCable.server.broadcast("spot_#{requested_by.spot.id}", { type: 'ASSISTANCE  ' })
   end
 end
